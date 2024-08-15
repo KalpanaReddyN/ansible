@@ -1,6 +1,6 @@
 - name: variables
   hosts: localhost
-  vars: 
+  vars:  #variable declaration   # the whole thing till duration is called play level
     Course: "Terraform"
     Trainer: "Sivakumar"
     Duration: "150Hrs"

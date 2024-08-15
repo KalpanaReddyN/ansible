@@ -1,0 +1,22 @@
+- name: variables
+  hosts: localhost
+  vars:  #variable declaration   # the whole thing till duration is called play level
+    Course: "Terraform"
+    Trainer: "Sivakumar"
+    Duration: "150Hrs"
+  tasks:
+  - name: print override information
+    vars:   # task level
+      Course: "DevOps"
+    ansible.builtin.debug:
+      msg: "Hi, we are learning {{Course}} from trainer {{Trainer}}, duration is {{Duration}}."
+  
+  - name: print inheritance information
+    ansible.builtin.debug:
+      msg: "Hi, we are learning {{Course}} from trainer {{Trainer}}, duration is {{Duration}}."
+
+
+
+# here this case task level course will print because it override. 
+# inheritance
+# preference goes to task-level
