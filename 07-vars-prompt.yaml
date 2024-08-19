@@ -6,7 +6,7 @@
     private: false   # means in terminal it will be seen
   - name: PASSWORD
     prompt: Please enter your password
-    private: true
+    private: true    # means in terminal it cannot be seen
   tasks:
   - name: print information
     ansible.builtin.debug:
