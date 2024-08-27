@@ -21,7 +21,7 @@
   tasks:
   - name: convert into lowercase
     ansible.builtin.debug:
-      msg: "{{ greeting | lowercase }}"
+      msg: "{{ greeting | lower }}"
 
 - name: remove duplicates
   hosts: localhost
@@ -72,5 +72,5 @@
     ansible.builtin.debug:
       msg: "After convert: {{ my_list | items2dict }}"
 
-      
+
 
