@@ -3,3 +3,4 @@
   tasks: #list of tasks/modules/collectins
   - name: pinging the server
     ansible.builtin.ping:
+      msg: "Hi, its working"
