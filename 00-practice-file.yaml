@@ -1,6 +1,13 @@
-- name: ping the server
+- name: install and run nginx
   hosts: web
+  become: yes
   tasks:
-  - name: pinging the server
-    ansible.builtin.ping:
-     msg: "Hi, its working"
+  - name: install nginx
+    ansible.builtin.package:
+      name: nginx
+      state: latest
+  - name: run nginx
+    ansible.builtin.service:
+      name: ngnix
+      state: started
+      enabled: yes
