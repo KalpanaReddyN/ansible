@@ -8,7 +8,7 @@
   - name: number is less than 10
     ansible.builtin.debug:
       msg: "given number {{number}} is less than 10"
-    when: number | int < 10
+    when: number | int < 10   # if this is false entire task wont run.
   
   - name: number is greater than 10
     ansible.builtin.debug:
