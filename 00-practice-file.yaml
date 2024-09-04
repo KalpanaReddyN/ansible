@@ -1,17 +1,6 @@
-- name: datatypes
-  hosts: localhost
-  vars:
-    Course: DevOps with AWS
-    Tools:
-    - Linux
-    - Docker
-    - Jenkins
-    Experience:
-      Devops: 3
-      Aws: 2
-      Docker: 1
-    RealProject: true
+- name: ping the server
+  hosts: web
   tasks:
-  - name: print variables
-    ansible.builtin.debug:
-      msg: 
+  - name: pinging the server
+    ansible.builtin.ping:
+    
