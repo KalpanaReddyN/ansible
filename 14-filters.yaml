@@ -81,8 +81,6 @@
   
 
   - name: check ip address
-    hosts: localhost
-    connection: local
     vars:
       myip: "356.168.1.1"
     ansible.builtin.debug:
