@@ -8,6 +8,7 @@
 
 - name: uppercase
   hosts: localhost
+  connection: local
   vars: 
     greeting: "Hello, Good Morning"
   tasks:
@@ -17,6 +18,7 @@
 
 - name: lowercase
   hosts: localhost
+  connection: local
   vars:
     greeting: "Hello, Good Evening"
   tasks:
@@ -26,6 +28,7 @@
 
 - name: remove duplicates
   hosts: localhost
+  connection: local
   vars:
     numbers: [1,3,3,2,4,6,7,8,7]
   tasks:
@@ -35,6 +38,7 @@
 
 - name: print min and max
   hosts: localhost
+  connection: local
   vars:
     ages: [25,35,67,89]
   tasks:
@@ -44,6 +48,7 @@
 
 - name: convert dictionary into items/list
   hosts: localhost
+  connection: local
   vars:
     my_dict: # this is called as dictionary/map/key,value pair
       Course: Ansible
@@ -60,6 +65,7 @@
 
 - name: convert items to dictionary
   hosts: localhost
+  connection: local
   vars:
     my_list:
     - {'key': 'Course', 'value': 'Ansible'}
@@ -75,6 +81,8 @@
   
 
   - name: check ip address
+    hosts: localhost
+    connection: local
     vars:
       myip: "356.168.1.1"
     ansible.builtin.debug:
