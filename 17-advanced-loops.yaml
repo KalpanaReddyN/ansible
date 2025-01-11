@@ -10,3 +10,5 @@
     - { name: 'mysql', state: 'latest'}  # this whole thing call as item
     - { name: 'postfix', state: 'absent'}
     - { name: 'nginx', state: 'absent'}
+
+   
