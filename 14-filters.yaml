@@ -82,7 +82,7 @@
 
   - name: check ip address
     vars:
-      myip: "254.168.1.1"
+      myip: "356.168.1.1"
     ansible.builtin.debug:
       msg: "{{ myip | ansible.utils.ipv4 }}"  #checking whehther the mentioned ip is ipv4 or not
     # here it asks to install netaddr -- pip3.9 install netaddr
