@@ -1,6 +1,6 @@
 - name: install and run nginx
   hosts: web
-  become: yes # equal to -b in ad-hoc commands, getting the root access
+  become: yes 
   tasks:
   - name: install nginx
     ansible.builtin.dnf:
@@ -11,4 +11,17 @@
       name: nginx
       state: started
       enabled: yes
+
+
+
+# equal to -b in ad-hoc commands, getting the root access
+
+
+[web]
+192.168.1.1
+192.168.1.2
+
+[db]
+192.168.1.3
+
 

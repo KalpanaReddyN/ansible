@@ -1,33 +1,63 @@
-- name: create ec2 instance
-  hosts: localhost
-  connection: local
-  vars:
-    vpc_sunet_id: "subnet-05f4df5d011925acd"
-    sg_id: "sg-099a766437c0af022"
-    image_id: "ami-09c813fb71547fc4f"
-  instances:
-  - mysql
-  - backend
-  - frontend
-  zone: kalpanadevops.online
+- name: configure backend server
+  hosts: backend
+  become: yes
   tasks:
-  - name: install botocore and boto3
+  - name: enable nodejs 20
+    ansible.builtin.command: dnf module enable nodejs:20 -y  #Executes a command on the remote host.
+  
+  - name: install nodejs 
+    ansible.builtin.package:
+      name: nodejs
+      state: present
+  
+  - name: create expense user
+    ansible.builtin.user:
+      name: expense
+  
+  - name: create app directory
+    ansible.builtin.file:
+      path: /app
+      state: directory
+  
+  - name: download the backend code
+    ansible.builtin.get_url:
+      url: https://expense-builds.s3.us-east-1.amazonaws.com/expense-backend-v2.zip
+      dest: /tmp/backend.zip
+  
+  - name: extract the backend code
+    ansible.builtin.unarchive:
+      src: /tmp/backend.zip 
+      dest: /app
+      remote_src: yes
+  
+  - name: install the dependencies
+    ansible.builtin.command: npm install
+    args:
+      chdir: /app
+  
+  - name: copy backend service
+    ansible.builtin.copy:
+      src: backend.service
+      dest: /etc/systemd/system/backend.service
+  
+  - name: ansible to install pymysql
     ansible.builtin.pip:
-    name:
-    - botocore
-    - boto3
-    executable: pip3.9
-
-  - name: create ec2-instances
-    amazon.aws.ec2_instance:
-      name: "{{item}}"
-      subnet_id: "{{vpc_sunet_id}}"
-      instance_type: "t3.micro"
-      sg_id: "{{sg_id}}"
-      image_id: "{{image_id}}"
-    loop: "{{instances}}"
-    register: "{{ec2-instances}}"
-    
-  - name: print the output
-    ansible.builtin.debug:
-      msg: "{{ec2-instances}}"
+      name:
+      - PyMySQL
+      - cryptography
+      executable: pip3.9
+  
+  - name: import mysql data
+    community.mysql.mysql_db:
+      login_user: root
+      login_password: "{{ mysql_root_password }}"
+      login_host: "{{ login_host }}"
+      target: /app/schema/backend.sql
+      name: all
+      state: import
+  
+  - name: daemon reload
+    ansible.builtin.systemd_service:
+      daemon_reload: true
+      state: restarted
+      name: backend

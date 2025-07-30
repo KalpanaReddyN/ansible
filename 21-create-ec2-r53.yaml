@@ -2,14 +2,14 @@
   hosts: local
   connection: local
   vars:
-    subnet_id: subnet-05f4df5d011925acd # replace with your subnet id
-    sg_id: "sg-099a766437c0af022"
+    subnet_id: subnet-010fc99df20ed9c47 # replace with your subnet id
+    sg_id: "sg-0f50d760744242991"
     ami_id: "ami-09c813fb71547fc4f"
     instances:
     - mysql
     - backend
     - frontend
-    zone: kalpanadevops.online
+    zone: devopsbykalpana.online
   tasks:
   - name: ansible to install boto3 and botocore
     ansible.builtin.pip:
@@ -60,4 +60,27 @@
 
   
 
-  
+
+
+
+
+
+
+
+
+
+# description:|
+#   This is a multiline string
+#   that maintains the line breaks.
+
+# description:>
+#   This is a multiline string
+#   that will be joined into a single line.
+
+
+
+
+
+
+
+
